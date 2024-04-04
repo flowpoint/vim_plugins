@@ -1,0 +1,5 @@
+let &runtimepath.=','.escape(expand('<sfile>:p:h'), '\,')
+"call UpdateRemotePlugins
+"set omifunc=Ofu1
+"
+"autocmd! CompleteDone * call TestCommand
