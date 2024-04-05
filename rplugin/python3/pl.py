@@ -89,7 +89,9 @@ class TestPlugin(object):
             if nl >= blen:
                 buf.append(str(resline))
             else:
-                buf[curline+offset] = str(resline)
+                oldrest = buf[nl:]
+                buf[nl] = str(resline)
+                buf[nl+1:] = oldrest
         #buf[3] = str(args)
         #print(args)
         #buf[
