@@ -1,11 +1,12 @@
-# nvim autocomplete plugin in <100 loc python
+# nvim autocomplete python plugin in <100 loc
 
-only contains the boilerplate  so it llm inference can be easily added/customized
-the actual llm completions can be freely added as a simple python function
+only contains the boilerplate  so llm inference can be easily added/customized
 
-it uses pynvim, neovims buildin menuone/popupmenu, completefunc, and preview window
+the actual llm completions can be freely added with a simple python function
 
-test it out locally:
+it uses pynvim, neovims builtin menuone/popupmenu, completefunc, and preview window
+
+### test it out locally:
 
 ```
 python -m venv venv
@@ -16,13 +17,23 @@ pip install pynvim
 start vim with the local plugin (avoids installing)
 
 ```
-nvim -u ./vimrc2
+nvim -u ./dev_vimrc
 ```
+
+### usage
+
+get line completions with "ctrl-x ctrl-u"
+
+choose completion with ctrx-n ctrx-p and enter
+
+you can use `:pc` to close the preview window
+
+### notes:
 
 the plugin itself sets the completefunc on vim start (bufenter)
 
 you might need to run:
 
-UpdateRemotePlugins to update the plugin
+`UpdateRemotePlugins` to update the plugin
 
-tips: you can use :pc to close the preview window
+the completion is atm activated for .py files, see the autocmd pattern for bufenter
