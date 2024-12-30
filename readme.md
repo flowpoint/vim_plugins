@@ -36,7 +36,7 @@ then, try it out with the example-vimrc
 nvim -u ./example_vimrc example.py
 ```
 
-then, run `:UpdateRemotePlugins` in nvim
+then, run `:UpdateRemotePlugins` in nvim and restart nvim
 
 to install, copy the plugin to your nvim runtimepath (`:set runtimepath`)
 
@@ -46,7 +46,7 @@ cp -r rplugin ~/.config/nvim/
 
 and the example_vimrc variables to your vimrc
 
-and run `:UpdateRemotePlugins` again
+and run `:UpdateRemotePlugins` and restart nvim, again
 
 the `UpdateRemotePlugins` command has to be run whenever the remote plugins change, see https://neovim.io/doc/user/remote_plugin.html#%3AUpdateRemotePlugins
 
