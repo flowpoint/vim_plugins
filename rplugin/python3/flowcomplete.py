@@ -6,10 +6,11 @@ def infer_qwen(prompt, max_new_tokens=512):
     # lazy load model, tokenizer
     global model, tokenizer
     model_name = "Qwen/Qwen2.5-Coder-0.5B-Instruct"
-    model = AutoModelForCausalLM.from_pretrained(
-        model_name, torch_dtype="auto", device_map="auto"
-    )
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    if model is None:
+        model = AutoModelForCausalLM.from_pretrained(
+            model_name, torch_dtype="auto", device_map="auto"
+        )
+        tokenizer = AutoTokenizer.from_pretrained(model_name)
 
     messages = [
         {"role": "system", "content": "You are a helpful code-assistant."},
