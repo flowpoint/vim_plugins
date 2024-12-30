@@ -1,0 +1,15 @@
+" this line is useful for local plugin loading/development
+" see https://pynvim.readthedocs.io/en/latest/usage/remote-plugins.html
+let &runtimepath.=','.escape(expand('<sfile>:p:h'), '\,')
+
+" this line is required for the plugin.
+" insert the text across multiple lines
+autocmd! CompleteDonePre * call FlowCompleteInsert()
+" convenience, auto-close the preview window after completion
+autocmd! CompleteDone * silent! pclose!
+
+" use the plugin as completefunc
+set completefunc=FlowComplete
+
+" uncomment next line to choose empty completion by default
+"set completeopt="menu,preview,noinsert"'

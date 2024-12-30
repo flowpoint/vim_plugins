@@ -1,39 +1,53 @@
-# nvim autocomplete python plugin in <100 loc
+# llm nvim autocomplete python plugin in <100 loc
 
-only contains the boilerplate  so llm inference can be easily added/customized
+a minimal llm autocomplete plugin with pynvim and qwen2.5-coder-0.5B-instruct
 
-the actual llm completions can be freely added with a simple python function
+* its entirely offline and local, after setup
+* its slow, but usable even on cpu. 
+* fully open source, since qwen is apache-2
+* very hackable 
 
 it uses pynvim, neovims builtin menuone/popupmenu, completefunc, and preview window
 
-### test it out locally:
+many more optimizations are possible (speed, quality, ..., fewer dependencies)
+
+### setup
+
+it requires python and the following packages
 
 ```
-python -m venv venv
-source venv/bin/activate
-pip install pynvim
+pip install pynvim torch transformers accelerate
 ```
 
-start vim with the local plugin (avoids installing)
+the qwen model needs to be in huggingface-cache
+
+it will be autodownloaded, but its recommended to manually cache it:
 
 ```
-nvim -u ./dev_vimrc
+python -c 'from transformers import AutoModelForCausalLM; \
+    model = AutoModelForCausalLM.from_pretrained( \
+    "Qwen/Qwen2.5-Coder-0.5B-Instruct", \
+        torch_dtype="auto", device_map="auto")'
 ```
 
-### usage
+then, try it out with the example-vimrc
 
-get line completions with "ctrl-x ctrl-u"
+```
+nvim -u ./example_vimrc example.py
+```
 
-choose completion with ctrx-n ctrx-p and enter
+then, run `:UpdateRemotePlugins` in nvim
+
+the `UpdateRemotePlugins` command has to be run whenever the remote plugins change, see https://neovim.io/doc/user/remote_plugin.html#%3AUpdateRemotePlugins
+
+later, copy the example_vimrc variables to your vimrc
+
+### usage hints
+
+get line completions with "ctrl-x_ctrl-u"
+
+choose completion with ctrl-n ctrl-p and enter
+
+cancel completion with ctrl-e
 
 you can use `:pc` to close the preview window
-
-### notes:
-
-the plugin itself sets the completefunc on vim start (bufenter)
-
-you might need to run:
-
-`UpdateRemotePlugins` to update the plugin
-
-the completion is atm activated for .py files, see the autocmd pattern for bufenter
